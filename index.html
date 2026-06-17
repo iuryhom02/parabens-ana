@@ -301,7 +301,7 @@
 
     /* =========================================================
        CONTAINER INTERNO DO CARD
-       - Aqui ficam a frase, o bolo, o texto, as partículas e os balões
+       - Aqui ficam a frase, o bolo, o texto e os balões
     ========================================================= */
     .birthday-inner {
       position: relative;
@@ -336,49 +336,6 @@
       filter: blur(18px);
       pointer-events: none;
       z-index: 0;
-    }
-
-    /* =========================================================
-       CAMADA DAS PARTÍCULAS BRANCAS
-       - Bolinhas brilhantes subindo no fundo do card
-    ========================================================= */
-    .sparkles-layer {
-      position: absolute;
-      inset: 0;
-      overflow: hidden;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    /* =========================================================
-       UMA PARTÍCULA BRILHANTE
-    ========================================================= */
-    .sparkle {
-      position: absolute;
-      bottom: -16px;
-      width: 4px;
-      height: 4px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.96);
-      box-shadow:
-        0 0 8px rgba(255, 255, 255, 0.9),
-        0 0 16px rgba(255, 255, 255, 0.45);
-      opacity: 0;
-      animation: sparkleRise linear infinite;
-    }
-
-    @keyframes sparkleRise {
-      0% {
-        transform: translateY(0) scale(0.7);
-        opacity: 0;
-      }
-      10% {
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-560px) scale(1.2);
-        opacity: 0;
-      }
     }
 
     /* =========================================================
@@ -699,9 +656,6 @@
       <button class="close-btn" id="closeBirthday" aria-label="Fechar">×</button>
 
       <div class="birthday-inner">
-        <!-- Partículas brilhantes de fundo -->
-        <div class="sparkles-layer" id="sparklesLayer"></div>
-
         <!-- Balões de fundo do card -->
         <div class="birthday-balloons" id="birthdayBalloons"></div>
 
@@ -796,7 +750,6 @@
     const closeVideo = document.getElementById("closeVideo");
 
     const videoHolder = document.getElementById("videoHolder");
-    const sparklesLayer = document.getElementById("sparklesLayer");
     const birthdayBalloons = document.getElementById("birthdayBalloons");
 
     /* =========================================================
@@ -942,26 +895,6 @@
       }
 
       requestAnimationFrame(drawFireworks);
-    }
-
-    /* =========================================================
-       PARTÍCULAS BRANCAS NO CARD
-       - Bolinhas brilhantes subindo no fundo do card
-    ========================================================= */
-    function createSparkles(count = 26) {
-      if (!sparklesLayer) return;
-      sparklesLayer.innerHTML = "";
-
-      for (let i = 0; i < count; i++) {
-        const sparkle = document.createElement("span");
-        sparkle.className = "sparkle";
-        sparkle.style.left = Math.random() * 100 + "%";
-        sparkle.style.animationDuration = (4.5 + Math.random() * 4.5).toFixed(2) + "s";
-        sparkle.style.animationDelay = (Math.random() * 3).toFixed(2) + "s";
-        sparkle.style.transform = `scale(${0.7 + Math.random() * 1.5})`;
-        sparkle.style.opacity = String(0.35 + Math.random() * 0.65);
-        sparklesLayer.appendChild(sparkle);
-      }
     }
 
     /* =========================================================
@@ -1155,8 +1088,7 @@
        EVENTOS DOS BOTÕES
     ========================================================= */
     btnBirthday.addEventListener("click", () => {
-      // cria partículas brilhantes e balões sempre que abrir o card
-      createSparkles(32);
+      // cria balões sempre que abrir o card
       startBirthdayBalloons();
       openModal(birthdayModal);
     });
