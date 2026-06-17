@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feliz Aniversário Ana Clara</title>
+
+  <style>
+    /* =========================================================
+       FONTE PRINCIPAL
+       - Cormorant Garamond: cursiva/vintage e legível
+       - Inter: usada no restante da página
+    ========================================================= */
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap');
+
+    /* =========================================================
+       VARIÁVEIS GERAIS
+       - Centraliza cores e sombras para facilitar ajustes futuros
+    ========================================================= */
+    :root {
+      --bg-1: #08110d;
+      --bg-2: #0d1813;
+      --bg-3: #13211b;
+      --text: #f7fbf8;
+      --muted: rgba(247, 251, 248, 0.72);
+      --green: #8ff0ad;
+      --green-2: #bff7cf;
+      --cyan: #31d7ff;
+      --yellow: #fff68a;
+      --pink: #ff5fc2;
+      --purple: #c48fff;
+      --blue: #67a8ff;
+      --border: rgba(255, 255, 255, 0.14);
+      --shadow: 0 22px 70px rgba(0, 0, 0, 0.48);
+    }
+
+    /* =========================================================
+       RESET BÁSICO
+       - Remove margens e paddings padrão do navegador
+    ========================================================= */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* =========================================================
+       FUNDO GERAL DA PÁGINA
+       - Fundo escuro esverdeado
+       - Gradiente e brilho suave no topo
+       - Sem barra de rolagem no celular
+    ========================================================= */
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(143, 240, 173, 0.12), transparent 28%),
+        radial-gradient(circle at center, rgba(255, 255, 255, 0.03), transparent 45%),
+        linear-gradient(180deg, var(--bg-2) 0%, var(--bg-1) 52%, #050b09 100%);
+      color: var(--text);
+    }
+
+    body {
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* =========================================================
+       CAMADA DAS ESTRELAS
+       - Fica acima do fundo e abaixo do conteúdo
+    ========================================================= */
+    .stars {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    /* =========================================================
+       UMA ESTRELINHA INDIVIDUAL
+       - Pequeno ponto com brilho
+    ========================================================= */
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      border-radius: 999px;
+      background: rgba(240, 255, 244, 0.96);
+      box-shadow: 0 0 10px rgba(160, 255, 190, 0.35);
+      opacity: 0.2;
+      animation: twinkle var(--tw, 5s) infinite ease-in-out;
+    }
+
+    /* =========================================================
+       ANIMAÇÃO DAS ESTRELAS
+    ========================================================= */
+    @keyframes twinkle {
+      0%, 100% {
+        transform: scale(0.7);
+        opacity: 0.18;
+      }
+      50% {
+        transform: scale(1.45);
+        opacity: 0.96;
+      }
+    }
+
+    /* =========================================================
+       CANVAS DOS FOGOS
+       - Fica fixo por cima do fundo
+    ========================================================= */
+    #fireworks {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* =========================================================
+       ÁREA PRINCIPAL
+       - Centraliza o conteúdo da tela
+    ========================================================= */
+    .page {
+      position: relative;
+      z-index: 3;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .hero {
+      width: min(760px, 100%);
+      text-align: center;
+      padding: 18px 14px;
+    }
+
+    /* =========================================================
+       TÍTULO PRINCIPAL
+       - Fonte cursiva/vintage
+       - Mais legível agora
+    ========================================================= */
+    .title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(40px, 5.8vw, 66px);
+      font-weight: 400;
+      font-style: italic;
+      letter-spacing: 0.02em;
+      color: #fbfffd;
+      text-shadow:
+        0 0 10px rgba(255, 255, 255, 0.16),
+        0 0 18px rgba(143, 240, 173, 0.16);
+      line-height: 1.08;
+      margin-bottom: 18px;
+    }
+
+    /* =========================================================
+       BOTÕES EMPILHADOS
+    ========================================================= */
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-items: center;
+    }
+
+    /* =========================================================
+       BOTÃO NEON
+       - Fundo semi-transparente
+       - Borda brilhante
+    ========================================================= */
+    .neon-btn {
+      width: min(300px, 92vw);
+      min-height: 56px;
+      border-radius: 18px;
+      border: 1.5px solid rgba(235, 255, 242, 0.42);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(143, 240, 173, 0.08));
+      color: var(--text);
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow:
+        0 0 0 1px rgba(143, 240, 173, 0.12) inset,
+        0 0 18px rgba(143, 240, 173, 0.15),
+        0 0 26px rgba(255, 255, 255, 0.06);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+
+    .neon-btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.72);
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.2) inset,
+        0 0 18px rgba(255, 255, 255, 0.12),
+        0 0 34px rgba(143, 240, 173, 0.2);
+    }
+
+    .neon-btn:active {
+      transform: translateY(0) scale(0.99);
+    }
+
+    /* =========================================================
+       BLUR QUANDO MODAL ABRE
+       - Deixa o fundo inacessível e desfocado
+    ========================================================= */
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    body.modal-open .page,
+    body.modal-open .stars,
+    body.modal-open #fireworks {
+      filter: blur(8px);
+    }
+
+    /* =========================================================
+       MODAIS
+       - Estrutura comum dos cards
+    ========================================================= */
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      background: rgba(0, 0, 0, 0.46);
+      z-index: 50;
+    }
+
+    .modal.show {
+      display: flex;
+      animation: fadeIn 0.18s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal-card {
+      position: relative;
+      width: min(900px, 100%);
+      max-height: min(90vh, 860px);
+      overflow: hidden;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: linear-gradient(180deg, rgba(19, 29, 24, 0.96), rgba(8, 12, 10, 0.97));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    /* =========================================================
+       BOTÃO X
+    ========================================================= */
+    .close-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 38px;
+      height: 38px;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      font-size: 22px;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      z-index: 3;
+      transition: transform 0.18s ease, background 0.18s ease;
+    }
+
+    .close-btn:hover {
+      transform: scale(1.06);
+      background: rgba(255, 255, 255, 0.14);
+    }
+
+    /* =========================================================
+       CARD DE ANIVERSÁRIO
+    ========================================================= */
+    .birthday-card {
+      min-height: min(78vh, 760px);
+      padding: 30px 16px 20px;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at top, rgba(143, 240, 173, 0.10), transparent 34%),
+        linear-gradient(180deg, rgba(11, 18, 14, 0.96), rgba(7, 11, 9, 0.98));
+    }
+
+    /* =========================================================
+       CONTAINER INTERNO DO CARD
+       - Aqui ficam a frase, o bolo, o texto, as partículas e os balões
+    ========================================================= */
+    .birthday-inner {
+      position: relative;
+      width: min(640px, 100%);
+      min-height: 440px;
+      overflow: hidden;
+      border-radius: 22px;
+      padding: 22px 16px 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background:
+        radial-gradient(circle at top, rgba(143, 240, 173, 0.10), transparent 34%),
+        rgba(255, 255, 255, 0.03);
+    }
+
+    /* =========================================================
+       BRILHO SUAVE POR TRÁS DO BOLO
+       - Apenas iluminação, sem mexer no desenho
+    ========================================================= */
+    .birthday-inner::before {
+      content: "";
+      position: absolute;
+      inset: 50% auto auto 50%;
+      width: 340px;
+      height: 240px;
+      transform: translate(-50%, -46%);
+      background: radial-gradient(circle, rgba(143, 240, 173, 0.12), transparent 68%);
+      filter: blur(18px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* =========================================================
+       CAMADA DAS PARTÍCULAS BRANCAS
+       - Bolinhas brilhantes subindo no fundo do card
+    ========================================================= */
+    .sparkles-layer {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* =========================================================
+       UMA PARTÍCULA BRILHANTE
+    ========================================================= */
+    .sparkle {
+      position: absolute;
+      bottom: -16px;
+      width: 4px;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow:
+        0 0 8px rgba(255, 255, 255, 0.9),
+        0 0 16px rgba(255, 255, 255, 0.45);
+      opacity: 0;
+      animation: sparkleRise linear infinite;
+    }
+
+    @keyframes sparkleRise {
+      0% {
+        transform: translateY(0) scale(0.7);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-560px) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    /* =========================================================
+       CAMADA DOS BALÕES NO CARD
+       - Fica atrás do bolo e do texto
+       - Balões sobem do fundo para o topo do card
+    ========================================================= */
+    .birthday-balloons {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .b-card-balloon {
+      position: absolute;
+      width: var(--size);
+      height: calc(var(--size) * 1.18);
+      filter: drop-shadow(0 0 8px var(--c));
+      opacity: 0.9;
+      will-change: transform, opacity;
+    }
+
+    .b-card-balloon::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border: 2px solid var(--c);
+      border-radius:
+        50% 50% 46% 46%
+        /
+        54% 54% 46% 46%;
+      background: transparent;
+      box-shadow: 0 0 8px var(--c);
+    }
+
+    .b-card-balloon::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -4px;
+      width: 8px;
+      height: 8px;
+      border-left: 2px solid var(--c);
+      border-bottom: 2px solid var(--c);
+      transform: translateX(-50%) rotate(45deg);
+    }
+
+    .b-card-string {
+      position: absolute;
+      left: 50%;
+      top: 98%;
+      width: 14px;
+      height: 22px;
+      transform: translateX(-50%);
+      overflow: visible;
+      pointer-events: none;
+      opacity: 0.95;
+    }
+
+    .b-card-string path {
+      fill: none;
+      stroke: var(--c);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* =========================================================
+       FRASE DO CARD
+    ========================================================= */
+    .birthday-phrase {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      font-size: clamp(17px, 2.6vw, 23px);
+      font-weight: 500;
+      color: #c8ffd6;
+      text-shadow: 0 0 10px rgba(143, 240, 173, 0.22);
+      line-height: 1.25;
+      margin-bottom: 4px;
+    }
+
+    /* =========================================================
+       BOLO NEON
+       - Um pouco menor, como você pediu
+       - Continua com a mesma arte
+       - Animação suave de sobe e desce
+    ========================================================= */
+    .cake-wrap {
+      position: relative;
+      z-index: 2;
+      width: min(200px, 68vw);
+      margin: 0;
+      filter:
+        drop-shadow(0 0 10px rgba(49, 215, 255, 0.12))
+        drop-shadow(0 0 12px rgba(143, 240, 173, 0.16));
+      animation: cakeFloat 3.8s ease-in-out infinite;
+      transform-origin: center;
+    }
+
+    @keyframes cakeFloat {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-7px);
+      }
+    }
+
+    .cake-svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /* =========================================================
+       TEXTO "HAPPY 21TH BIRTHDAY"
+       - Mantido no estilo anterior
+       - Ajustado para lembrar a referência
+    ========================================================= */
+    .happy-text {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      line-height: 0.92;
+      margin-top: 6px;
+    }
+
+    .happy {
+      display: block;
+      font-size: clamp(34px, 5vw, 56px);
+      font-weight: 300;
+      color: #f8fcf9;
+      letter-spacing: 0.01em;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.14);
+    }
+
+    .age {
+      display: block;
+      margin-top: 10px;
+      font-size: clamp(58px, 10vw, 100px);
+      font-weight: 800;
+      color: #7ef0a6;
+      letter-spacing: -0.03em;
+      text-shadow:
+        0 0 8px rgba(126, 240, 166, 0.58),
+        0 0 22px rgba(126, 240, 166, 0.33),
+        0 0 36px rgba(126, 240, 166, 0.2);
+    }
+
+    .birthday {
+      display: block;
+      margin-top: 2px;
+      font-size: clamp(30px, 5vw, 54px);
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.12);
+    }
+
+    /* =========================================================
+       CARD DO VÍDEO
+    ========================================================= */
+    .video-card {
+      width: min(920px, 100%);
+      min-height: min(82vh, 840px);
+      padding: 56px 16px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, rgba(11, 18, 14, 0.96), rgba(6, 9, 8, 0.98));
+    }
+
+    .video-frame {
+      width: min(430px, 100%);
+      aspect-ratio: 9 / 16;
+      border-radius: 22px;
+      overflow: hidden;
+      background: #000;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow:
+        0 0 0 1px rgba(143, 240, 173, 0.06) inset,
+        var(--shadow);
+      display: grid;
+      place-items: center;
+    }
+
+    .video-holder {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      place-items: center;
+      background: #000;
+      overflow: auto;
+    }
+
+    .video-loading {
+      padding: 16px;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.76);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .video-fallback-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 14px;
+      padding: 12px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: #fff;
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .small-note {
+      margin-top: 12px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.62);
+      max-width: 360px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.4;
+    }
+
+    /* =========================================================
+       RESPONSIVIDADE
+       - Ajustes para celular
+    ========================================================= */
+    @media (max-width: 640px) {
+      .page {
+        padding: 16px;
+      }
+
+      .hero {
+        padding: 10px 6px;
+      }
+
+      .title {
+        font-size: clamp(34px, 11vw, 50px);
+      }
+
+      .neon-btn {
+        min-height: 52px;
+        font-size: 15px;
+      }
+
+      .modal-card {
+        border-radius: 20px;
+      }
+
+      .birthday-card {
+        min-height: auto;
+        padding: 18px 12px 12px;
+      }
+
+      .birthday-inner {
+        min-height: 360px;
+        padding: 18px 12px;
+      }
+
+      .birthday-phrase {
+        font-size: clamp(16px, 5vw, 20px);
+      }
+
+      .cake-wrap {
+        width: min(270px, 76vw);
+      }
+
+      .video-card {
+        min-height: 84vh;
+        padding-top: 52px;
+      }
+
+      .video-frame {
+        width: min(92vw, 390px);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- =========================================================
+       CAMADA DE ESTRELINHAS
+  ========================================================= -->
+  <div class="stars" id="stars"></div>
+
+  <!-- =========================================================
+       CANVAS DOS FOGOS
+  ========================================================= -->
+  <canvas id="fireworks"></canvas>
+
+  <!-- =========================================================
+       ÁREA PRINCIPAL
+  ========================================================= -->
+  <main class="page">
+    <section class="hero">
+      <!-- Título principal -->
+      <h1 class="title">Feliz Aniversário Ana Clara</h1>
+
+      <!-- Botões -->
+      <div class="buttons">
+        <button class="neon-btn" id="btnBirthday">Clique Aqui Ana</button>
+        <button class="neon-btn" id="btnVideo">Vídeo Maneiro</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================
+       MODAL 1: ANIVERSÁRIO
+  ========================================================= -->
+  <div class="modal" id="birthdayModal" aria-hidden="true">
+    <div class="modal-card birthday-card" role="dialog" aria-modal="true" aria-label="Card de aniversário">
+      <button class="close-btn" id="closeBirthday" aria-label="Fechar">×</button>
+
+      <div class="birthday-inner">
+        <!-- Partículas brilhantes de fundo -->
+        <div class="sparkles-layer" id="sparklesLayer"></div>
+
+        <!-- Balões de fundo do card -->
+        <div class="birthday-balloons" id="birthdayBalloons"></div>
+
+        <!-- Frase do card -->
+        <div class="birthday-phrase">21 anos? Ta veia demaaaaiiissss</div>
+
+        <!-- Bolo neon -->
+        <div class="cake-wrap" aria-hidden="true">
+          <svg class="cake-svg" viewBox="0 0 260 180" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="glow">
+                <feGaussianBlur stdDeviation="2.4" result="coloredBlur"></feGaussianBlur>
+                <feMerge>
+                  <feMergeNode in="coloredBlur"></feMergeNode>
+                  <feMergeNode in="SourceGraphic"></feMergeNode>
+                </feMerge>
+              </filter>
+            </defs>
+
+            <g filter="url(#glow)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <ellipse cx="130" cy="151" rx="92" ry="12" stroke="#31d7ff" stroke-width="3.5"></ellipse>
+              <path d="M58 124 C 74 129 87 131 130 131 C 173 131 186 129 202 124" stroke="#31d7ff" stroke-width="3.5"></path>
+              <path d="M72 124 V92 H188 V124" stroke="#7dff8b" stroke-width="4.2"></path>
+              <path d="M84 92 C 92 83 99 84 106 89 C 113 94 121 96 128 88 C 136 80 144 80 151 88 C 158 96 166 96 176 90 C 184 85 191 86 196 92" stroke="#7dff8b" stroke-width="4.2"></path>
+              <path d="M78 102 C 86 108 93 109 100 102" stroke="#7dff8b" stroke-width="3"></path>
+              <path d="M104 102 C 111 108 118 109 125 102" stroke="#7dff8b" stroke-width="3"></path>
+              <path d="M130 102 C 137 108 144 109 151 102" stroke="#7dff8b" stroke-width="3"></path>
+              <path d="M156 102 C 163 108 170 109 177 102" stroke="#7dff8b" stroke-width="3"></path>
+              <path d="M70 92 V66 H190 V92" stroke="#31d7ff" stroke-width="4.2"></path>
+              <path d="M85 66 C 93 58 101 59 108 65 C 115 71 121 73 129 65 C 137 57 145 58 152 65 C 159 72 167 73 175 66 C 181 61 187 61 190 66" stroke="#31d7ff" stroke-width="4.2"></path>
+              <path d="M74 78 C 90 84 105 85 130 85 C 155 85 170 84 186 78" stroke="#31d7ff" stroke-width="3.2"></path>
+              <path d="M65 133 C 83 140 107 142 130 142 C 153 142 177 140 195 133" stroke="#7dff8b" stroke-width="3.2"></path>
+            </g>
+
+            <g filter="url(#glow)">
+              <rect x="92" y="28" width="12" height="38" rx="6" fill="none" stroke="#7dff8b" stroke-width="3.2"></rect>
+              <rect x="126" y="16" width="12" height="50" rx="6" fill="none" stroke="#7dff8b" stroke-width="3.2"></rect>
+              <rect x="160" y="30" width="12" height="36" rx="6" fill="none" stroke="#7dff8b" stroke-width="3.2"></rect>
+
+              <path d="M98 14 C104 20 104 28 98 34 C92 28 92 20 98 14Z" fill="#fff68a"></path>
+              <path d="M132 2 C138 8 138 18 132 26 C126 18 126 8 132 2Z" fill="#fff68a"></path>
+              <path d="M166 16 C172 22 172 29 166 36 C160 29 160 22 166 16Z" fill="#fff68a"></path>
+            </g>
+          </svg>
+        </div>
+
+        <!-- Texto central -->
+        <div class="happy-text">
+          <span class="happy">Happy</span>
+          <span class="age">21th</span>
+          <span class="birthday">Birthday!</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       MODAL 2: VÍDEO
+  ========================================================= -->
+  <div class="modal" id="videoModal" aria-hidden="true">
+    <div class="modal-card video-card" role="dialog" aria-modal="true" aria-label="Vídeo do Instagram">
+      <button class="close-btn" id="closeVideo" aria-label="Fechar">×</button>
+
+      <div class="video-frame">
+        <div class="video-holder" id="videoHolder">
+          <div class="video-loading">Carregando o vídeo do Instagram...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* =========================================================
+       REEL DO INSTAGRAM
+    ========================================================= */
+    const REEL_URL = "https://www.instagram.com/reel/DZLH20hBvft/?igsh=MXIxZDM2aWJvaWl4cg==";
+
+    /* =========================================================
+       REFERÊNCIAS DOS ELEMENTOS
+    ========================================================= */
+    const starsEl = document.getElementById("stars");
+    const canvas = document.getElementById("fireworks");
+    const ctx = canvas.getContext("2d");
+
+    const btnBirthday = document.getElementById("btnBirthday");
+    const btnVideo = document.getElementById("btnVideo");
+
+    const birthdayModal = document.getElementById("birthdayModal");
+    const videoModal = document.getElementById("videoModal");
+
+    const closeBirthday = document.getElementById("closeBirthday");
+    const closeVideo = document.getElementById("closeVideo");
+
+    const videoHolder = document.getElementById("videoHolder");
+    const sparklesLayer = document.getElementById("sparklesLayer");
+    const birthdayBalloons = document.getElementById("birthdayBalloons");
+
+    /* =========================================================
+       CRIAÇÃO DAS ESTRELAS NO FUNDO
+    ========================================================= */
+    function createStars(count) {
+      starsEl.innerHTML = "";
+
+      for (let i = 0; i < count; i++) {
+        const star = document.createElement("span");
+        star.className = "star";
+        star.style.left = Math.random() * 100 + "vw";
+        star.style.top = Math.random() * 100 + "vh";
+        star.style.opacity = (0.14 + Math.random() * 0.76).toFixed(2);
+        star.style.setProperty("--tw", (3 + Math.random() * 6).toFixed(2) + "s");
+        star.style.transform = `scale(${0.5 + Math.random() * 1.2})`;
+        starsEl.appendChild(star);
+      }
+    }
+
+    /* =========================================================
+       FOGOS DE ARTIFÍCIO
+       - Fogos finos subindo de baixo para cima
+       - Estouram e continuam surgindo enquanto o site estiver aberto
+    ========================================================= */
+    let rockets = [];
+    let sparks = [];
+    let lastLaunch = 0;
+
+    function resizeCanvas() {
+      const dpr = Math.max(window.devicePixelRatio || 1, 1);
+      canvas.width = Math.floor(window.innerWidth * dpr);
+      canvas.height = Math.floor(window.innerHeight * dpr);
+      canvas.style.width = window.innerWidth + "px";
+      canvas.style.height = window.innerHeight + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function rand(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    function launchRocket() {
+      rockets.push({
+        x: rand(window.innerWidth * 0.08, window.innerWidth * 0.92),
+        y: window.innerHeight + 10,
+        targetY: rand(window.innerHeight * 0.12, window.innerHeight * 0.46),
+        speed: rand(4.9, 7.9),
+        color: `hsl(${Math.floor(rand(120, 165))}, 96%, ${Math.floor(rand(70, 88))}%)`,
+        trail: [],
+        exploded: false
+      });
+    }
+
+    function explode(x, y, color) {
+      const count = Math.floor(rand(26, 42));
+      for (let i = 0; i < count; i++) {
+        const angle = (Math.PI * 2 * i) / count + rand(-0.08, 0.08);
+        const speed = rand(1.1, 4.0);
+
+        sparks.push({
+          x,
+          y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          life: 1,
+          decay: rand(0.012, 0.024),
+          color,
+          size: rand(0.8, 1.6)
+        });
+      }
+    }
+
+    function drawFireworks() {
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      ctx.globalCompositeOperation = "lighter";
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+
+      /* foguetes */
+      for (let i = rockets.length - 1; i >= 0; i--) {
+        const r = rockets[i];
+
+        r.trail.push({ x: r.x, y: r.y });
+        if (r.trail.length > 14) r.trail.shift();
+
+        r.y -= r.speed;
+
+        // linha bem fininha subindo
+        ctx.beginPath();
+        ctx.strokeStyle = "rgba(210, 255, 224, 0.9)";
+        ctx.lineWidth = 1;
+        ctx.moveTo(r.x, r.y + 16);
+        ctx.lineTo(r.x, r.y);
+        ctx.stroke();
+
+        // rastro suave
+        if (r.trail.length > 2) {
+          ctx.beginPath();
+          ctx.strokeStyle = "rgba(143, 240, 173, 0.26)";
+          ctx.lineWidth = 1;
+          ctx.moveTo(r.trail[0].x, r.trail[0].y);
+          for (let t = 1; t < r.trail.length; t++) {
+            ctx.lineTo(r.trail[t].x, r.trail[t].y);
+          }
+          ctx.stroke();
+        }
+
+        if (r.y <= r.targetY && !r.exploded) {
+          r.exploded = true;
+          explode(r.x, r.y, r.color);
+          rockets.splice(i, 1);
+        }
+      }
+
+      /* partículas do estouro */
+      for (let i = sparks.length - 1; i >= 0; i--) {
+        const p = sparks[i];
+
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vx *= 0.985;
+        p.vy *= 0.985;
+        p.vy += 0.02;
+        p.life -= p.decay;
+
+        ctx.globalAlpha = Math.max(p.life, 0);
+        ctx.beginPath();
+        ctx.fillStyle = p.color;
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.globalAlpha = 1;
+
+        if (p.life <= 0) sparks.splice(i, 1);
+      }
+
+      // dispara novos foguetes em intervalos curtos
+      const now = performance.now();
+      if (now - lastLaunch > 140) {
+        launchRocket();
+        if (Math.random() > 0.7) launchRocket();
+        lastLaunch = now;
+      }
+
+      requestAnimationFrame(drawFireworks);
+    }
+
+    /* =========================================================
+       PARTÍCULAS BRANCAS NO CARD
+       - Bolinhas brilhantes subindo no fundo do card
+    ========================================================= */
+    function createSparkles(count = 26) {
+      if (!sparklesLayer) return;
+      sparklesLayer.innerHTML = "";
+
+      for (let i = 0; i < count; i++) {
+        const sparkle = document.createElement("span");
+        sparkle.className = "sparkle";
+        sparkle.style.left = Math.random() * 100 + "%";
+        sparkle.style.animationDuration = (4.5 + Math.random() * 4.5).toFixed(2) + "s";
+        sparkle.style.animationDelay = (Math.random() * 3).toFixed(2) + "s";
+        sparkle.style.transform = `scale(${0.7 + Math.random() * 1.5})`;
+        sparkle.style.opacity = String(0.35 + Math.random() * 0.65);
+        sparklesLayer.appendChild(sparkle);
+      }
+    }
+
+    /* =========================================================
+       BALÕES NO CARD DE ANIVERSÁRIO
+       - Sobem do fundo até o topo
+       - Só aparecem dentro do card
+    ========================================================= */
+    const balloonColors = [
+      "var(--cyan)",
+      "var(--green)",
+      "var(--yellow)",
+      "var(--pink)",
+      "var(--purple)",
+      "var(--blue)"
+    ];
+
+    function createBalloonString() {
+      return `
+        <svg class="b-card-string" viewBox="0 0 20 28" aria-hidden="true">
+          <path d="
+            M10 0
+            C 7 4, 13 7, 10 11
+            C 7 15, 13 18, 10 22
+            C 8 24, 11 26, 10 28
+          " />
+        </svg>
+      `;
+    }
+
+    function spawnBalloon() {
+      if (!birthdayBalloons) return;
+
+      const balloon = document.createElement("div");
+      balloon.className = "b-card-balloon";
+
+      const isMobile = window.innerWidth <= 640;
+      const size = Math.random() * (isMobile ? 18 : 24) + (isMobile ? 22 : 28);
+      const color = balloonColors[Math.floor(Math.random() * balloonColors.length)];
+      const startX = Math.random() * 90 + 5;
+
+      balloon.style.setProperty("--size", `${size}px`);
+      balloon.style.setProperty("--c", color);
+      balloon.style.left = `${startX}%`;
+      balloon.style.top = "105%";
+      balloon.innerHTML = createBalloonString();
+
+      birthdayBalloons.appendChild(balloon);
+
+      const duration = Math.random() * 4000 + 9000;
+
+      balloon.animate(
+        [
+          { transform: "translateY(0px)", opacity: 0.9 },
+          { transform: "translateY(-650px)", opacity: 0.9 }
+        ],
+        {
+          duration,
+          easing: "linear"
+        }
+      );
+
+      setTimeout(() => {
+        balloon.remove();
+      }, duration);
+    }
+
+    function startBirthdayBalloons() {
+      if (!birthdayBalloons) return;
+
+      birthdayBalloons.innerHTML = "";
+
+      // alguns balões iniciais para não começar vazio
+      for (let i = 0; i < 5; i++) {
+        setTimeout(() => {
+          spawnBalloon();
+        }, i * 700);
+      }
+
+      // continua criando balões ao longo do tempo
+      setInterval(() => {
+        if (birthdayModal.classList.contains("show")) {
+          spawnBalloon();
+        }
+      }, 1300);
+    }
+
+    /* =========================================================
+       ABRIR / FECHAR MODAIS
+    ========================================================= */
+    function openModal(modal) {
+      modal.classList.add("show");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+    }
+
+    function closeModal(modal) {
+      modal.classList.remove("show");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("modal-open");
+    }
+
+    function closeVideoAndClear() {
+      // limpa o embed para garantir reinício completo na próxima abertura
+      videoHolder.innerHTML = `<div class="video-loading">Carregando o vídeo do Instagram...</div>`;
+      closeModal(videoModal);
+    }
+
+    /* =========================================================
+       EMBED DO INSTAGRAM
+       - Carrega o Reel oficial na janela
+       - Se não funcionar, cai no link como fallback
+    ========================================================= */
+    const IG_SCRIPT_ID = "instagram-embed-script";
+
+    function ensureInstagramScript() {
+      return new Promise((resolve, reject) => {
+        if (window.instgrm && window.instgrm.Embeds) {
+          resolve();
+          return;
+        }
+
+        const existing = document.getElementById(IG_SCRIPT_ID);
+        if (existing) {
+          const start = Date.now();
+          const timer = setInterval(() => {
+            if (window.instgrm && window.instgrm.Embeds) {
+              clearInterval(timer);
+              resolve();
+            }
+            if (Date.now() - start > 8000) {
+              clearInterval(timer);
+              reject(new Error("Instagram embed script não respondeu."));
+            }
+          }, 100);
+          return;
+        }
+
+        const script = document.createElement("script");
+        script.id = IG_SCRIPT_ID;
+        script.async = true;
+        script.src = "https://www.instagram.com/embed.js";
+        script.onload = () => resolve();
+        script.onerror = () => reject(new Error("Falha ao carregar o script do Instagram."));
+        document.body.appendChild(script);
+      });
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    async function loadInstagramReel() {
+      videoHolder.innerHTML = `<div class="video-loading">Carregando o vídeo do Instagram...</div>`;
+
+      try {
+        // bloco oficial do embed
+        videoHolder.innerHTML = `
+          <blockquote
+            class="instagram-media"
+            data-instgrm-permalink="${escapeHtml(REEL_URL)}"
+            data-instgrm-version="14"
+            style="background:#000; border:0; margin:0; width:100%; height:100%; min-width:326px; padding:0;"
+          >
+            <a href="${escapeHtml(REEL_URL)}" target="_blank" rel="noopener noreferrer">Abrir no Instagram</a>
+          </blockquote>
+        `;
+
+        await ensureInstagramScript();
+
+        if (window.instgrm && window.instgrm.Embeds && window.instgrm.Embeds.process) {
+          window.instgrm.Embeds.process();
+        }
+      } catch (err) {
+        // fallback seguro
+        videoHolder.innerHTML = `
+          <div class="video-loading">
+            Não foi possível carregar o embed automaticamente.<br />
+            <a class="video-fallback-link" href="${escapeHtml(REEL_URL)}" target="_blank" rel="noopener noreferrer">Abrir no Instagram</a>
+            <div class="small-note">Isso pode acontecer se o Reel não permitir incorporação.</div>
+          </div>
+        `;
+      }
+    }
+
+    /* =========================================================
+       EVENTOS DOS BOTÕES
+    ========================================================= */
+    btnBirthday.addEventListener("click", () => {
+      // cria partículas brilhantes e balões sempre que abrir o card
+      createSparkles(32);
+      startBirthdayBalloons();
+      openModal(birthdayModal);
+    });
+
+    btnVideo.addEventListener("click", async () => {
+      openModal(videoModal);
+      await loadInstagramReel();
+    });
+
+    closeBirthday.addEventListener("click", () => closeModal(birthdayModal));
+    closeVideo.addEventListener("click", () => closeVideoAndClear());
+
+    // clique fora do card fecha o modal do aniversário
+    birthdayModal.addEventListener("click", (e) => {
+      if (e.target === birthdayModal) closeModal(birthdayModal);
+    });
+
+    // clique fora do card fecha o modal do vídeo
+    videoModal.addEventListener("click", (e) => {
+      if (e.target === videoModal) closeVideoAndClear();
+    });
+
+    // ESC fecha qualquer modal aberto
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        if (birthdayModal.classList.contains("show")) closeModal(birthdayModal);
+        if (videoModal.classList.contains("show")) closeVideoAndClear();
+      }
+    });
+
+    /* =========================================================
+       INICIALIZAÇÃO
+    ========================================================= */
+    createStars(145);
+    resizeCanvas();
+    drawFireworks();
+
+    // inicializa os balões do card
+    startBirthdayBalloons();
+
+    // reajusta canvas e estrelas ao redimensionar a tela
+    window.addEventListener("resize", () => {
+      resizeCanvas();
+      createStars(145);
+    });
+  </script>
+</body>
+</html>
