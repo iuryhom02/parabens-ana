@@ -774,10 +774,15 @@
        FOGOS DE ARTIFÍCIO
        - Fogos finos subindo de baixo para cima
        - Estouram e continuam surgindo enquanto o site estiver aberto
+       - ALTERAÇÃO: agora dá para parar e voltar os fogos quando abrir/fechar os cards
     ========================================================= */
     let rockets = [];
     let sparks = [];
     let lastLaunch = 0;
+
+    // ALTERAÇÃO: controle da animação dos fogos
+    let fireworksRunning = false;
+    let fireworksFrameId = null;
 
     function resizeCanvas() {
       const dpr = Math.max(window.devicePixelRatio || 1, 1);
@@ -823,7 +828,33 @@
       }
     }
 
+    // ALTERAÇÃO: função para iniciar os fogos
+    function startFireworks() {
+      if (fireworksRunning) return;
+
+      fireworksRunning = true;
+      lastLaunch = performance.now();
+      fireworksFrameId = requestAnimationFrame(drawFireworks);
+    }
+
+    // ALTERAÇÃO: função para parar os fogos
+    function stopFireworks() {
+      fireworksRunning = false;
+
+      if (fireworksFrameId !== null) {
+        cancelAnimationFrame(fireworksFrameId);
+        fireworksFrameId = null;
+      }
+
+      // limpa os fogos já desenhados e também as partículas para aliviar o peso
+      rockets = [];
+      sparks = [];
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    }
+
     function drawFireworks() {
+      if (!fireworksRunning) return;
+
       ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
       ctx.globalCompositeOperation = "lighter";
       ctx.lineCap = "round";
@@ -894,7 +925,7 @@
         lastLaunch = now;
       }
 
-      requestAnimationFrame(drawFireworks);
+      fireworksFrameId = requestAnimationFrame(drawFireworks);
     }
 
     /* =========================================================
@@ -983,8 +1014,11 @@
 
     /* =========================================================
        ABRIR / FECHAR MODAIS
+       - ALTERAÇÃO: ao abrir qualquer card os fogos param
+       - ALTERAÇÃO: ao fechar qualquer card os fogos voltam
     ========================================================= */
     function openModal(modal) {
+      stopFireworks(); // ALTERAÇÃO: para os fogos quando abrir o card
       modal.classList.add("show");
       modal.setAttribute("aria-hidden", "false");
       document.body.classList.add("modal-open");
@@ -994,6 +1028,7 @@
       modal.classList.remove("show");
       modal.setAttribute("aria-hidden", "true");
       document.body.classList.remove("modal-open");
+      startFireworks(); // ALTERAÇÃO: volta os fogos quando sair do card
     }
 
     function closeVideoAndClear() {
@@ -1124,7 +1159,9 @@
     ========================================================= */
     createStars(145);
     resizeCanvas();
-    drawFireworks();
+
+    // ALTERAÇÃO: os fogos começam normalmente ao abrir a página
+    startFireworks();
 
     // inicializa os balões do card
     startBirthdayBalloons();
