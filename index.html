@@ -888,7 +888,7 @@
 
       // dispara novos foguetes em intervalos curtos
       const now = performance.now();
-      if (now - lastLaunch > 140) {
+      if (now - lastLaunch > 500) {
         launchRocket();
         if (Math.random() > 0.7) launchRocket();
         lastLaunch = now;
@@ -967,7 +967,7 @@
       birthdayBalloons.innerHTML = "";
 
       // alguns balões iniciais para não começar vazio
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < 3; i++) {
         setTimeout(() => {
           spawnBalloon();
         }, i * 700);
@@ -978,7 +978,7 @@
         if (birthdayModal.classList.contains("show")) {
           spawnBalloon();
         }
-      }, 1300);
+      }, 3500);
     }
 
     /* =========================================================
